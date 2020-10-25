@@ -1,0 +1,27 @@
+{
+  "name": "yoracle.link",
+  "version": "1.0.0",
+  "description": "UniswapV2Oracle is an on-chain oracle for UniswapV2 pairs. It allows any pair to be added in a permissionless fashion.",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iearn-finance/yoracle.link.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/iearn-finance/yoracle.link/issues"
+  },
+  "homepage": "https://github.com/iearn-finance/yoracle.link#readme",
+  "dependencies": {
+    "solc": "^0.6.6",
+    "truffle": "^5.1.26"
+  }
+}

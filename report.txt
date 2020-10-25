@@ -1,0 +1,116 @@
+(env) ubuntu@ip-10-0-0-108:~/slither/slither/yoracle.link$ slither . --triage-mode --generate-patches
+'npx truffle@5.1.26 compile --all' running (use --truffle-version truffle@x.x.x to use specific version)
+
+Compiling your contracts...
+===========================
+> Compiling ./contracts/Migrations.sol
+> Compiling ./contracts/UniswapInsuranceQuote.sol
+> Compiling ./contracts/UniswapOracleFactory.sol
+> Compiling ./contracts/UniswapV2Oracle.sol
+> Artifacts written to /home/ubuntu/slither/slither/yoracle.link/build/contracts
+> Compiled successfully using:
+   - solc: 0.6.6+commit.6c089d02.Emscripten.clang
+
+
+- Fetching solc version list from solc-bin. Attempt #1
+- Fetching solc version list from solc-bin. Attempt #2
+- Fetching solc version list from solc-bin. Attempt #3
+
+INFO:Detectors:
+0: IUniswapV2Pair is re-used:
+	- UniswapOracleFactory.sol#25-74
+	- UniswapInsuranceQuote.sol#73-122
+	- UniswapV2Oracle.sol#19-68
+	- UniswapInsuranceQuote.sol#73-122
+1: SafeMath is re-used:
+	- UniswapOracleFactory.sol#175-187
+	- UniswapInsuranceQuote.sol#3-46
+	- UniswapV2Oracle.sol#161-173
+	- UniswapInsuranceQuote.sol#3-46
+2: IUniswapV2Factory is re-used:
+	- UniswapV2Oracle.sol#3-17
+	- UniswapOracleFactory.sol#5-19
+3: FixedPoint is re-used:
+	- UniswapV2Oracle.sol#71-126
+	- UniswapOracleFactory.sol#81-136
+4: UniswapV2OracleLibrary is re-used:
+	- UniswapV2Oracle.sol#129-157
+	- UniswapOracleFactory.sol#143-171
+5: UniswapV2Library is re-used:
+	- UniswapV2Oracle.sol#175-250
+	- UniswapOracleFactory.sol#189-264
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#name-reused
+Results to hide during next runs: "0,1,...,6" or "All" (enter to not hide results):
+INFO:Detectors:
+0: UniswapV2Library.getAmountsOut(address,uint256,address[]).i (UniswapOracleFactory.sol#248) is a local variable never initialized
+1: FixedPoint.mul(FixedPoint.uq112x112,uint256).z (UniswapOracleFactory.sol#115) is a local variable never initialized
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#uninitialized-local-variables
+Results to hide during next runs: "0,1,...,2" or "All" (enter to not hide results):
+INFO:Detectors:
+0: UniswapV2Oracle._update(address) (UniswapV2Oracle.sol#338-359) ignores return value by pairObservations[pair].push() (UniswapV2Oracle.sol#341)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#unused-return
+Results to hide during next runs: "0,1,...,1" or "All" (enter to not hide results):
+INFO:Detectors:
+0: UniswapV2Oracle._update(address) (UniswapV2Oracle.sol#338-359) has external calls inside a loop: pairObservations[pair].push() (UniswapV2Oracle.sol#341)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation/#calls-inside-a-loop
+Results to hide during next runs: "0,1,...,1" or "All" (enter to not hide results):
+INFO:Detectors:
+0: UniswapV2OracleLibrary.currentCumulativePrices(address) (UniswapOracleFactory.sol#152-170) uses timestamp for comparisons
+	Dangerous comparisons:
+	- blockTimestampLast != blockTimestamp (UniswapOracleFactory.sol#161)
+1: UniswapV2Oracle._update(address) (UniswapV2Oracle.sol#338-359) uses timestamp for comparisons
+	Dangerous comparisons:
+	- i < granularity (UniswapV2Oracle.sol#340)
+	- timeElapsed > periodSize (UniswapV2Oracle.sol#350)
+2: UniswapV2Oracle.consult(address,uint256,address) (UniswapV2Oracle.sol#377-394) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(timeElapsed <= windowSize,SlidingWindowOracle: MISSING_HISTORICAL_OBSERVATION) (UniswapV2Oracle.sol#382)
+	- require(bool,string)(timeElapsed >= windowSize - periodSize * 2,SlidingWindowOracle: UNEXPECTED_TIME_ELAPSED) (UniswapV2Oracle.sol#384)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#block-timestamp
+Results to hide during next runs: "0,1,...,3" or "All" (enter to not hide results):
+INFO:Detectors:
+0: Different versions of Solidity is used in :
+	- Version used: ['=0.6.6', '>=0.4.0', '>=0.4.22<0.8.0', '>=0.5.0', '>=0.6.6']
+	- =0.6.6 (UniswapInsuranceQuote.sol#1)
+	- >=0.6.6 (UniswapOracleFactory.sol#3)
+	- >=0.5.0 (UniswapOracleFactory.sol#23)
+	- >=0.4.0 (UniswapOracleFactory.sol#78)
+	- >=0.5.0 (UniswapOracleFactory.sol#140)
+	- =0.6.6 (UniswapV2Oracle.sol#1)
+	- >=0.4.22<0.8.0 (Migrations.sol#2)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#different-pragma-directives-are-used
+INFO:Detectors:
+Impossible to patch:
+	Different versions of Solidity is used in :
+	- Version used: ['=0.6.6', '>=0.4.0', '>=0.4.22<0.8.0', '>=0.5.0', '>=0.6.6']
+	- =0.6.6 (UniswapInsuranceQuote.sol#1)
+	- >=0.6.6 (UniswapOracleFactory.sol#3)
+	- >=0.5.0 (UniswapOracleFactory.sol#23)
+	- >=0.4.0 (UniswapOracleFactory.sol#78)
+	- >=0.5.0 (UniswapOracleFactory.sol#140)
+	- =0.6.6 (UniswapV2Oracle.sol#1)
+	- >=0.4.22<0.8.0 (Migrations.sol#2)
+	Unknown version!
+Results to hide during next runs: "0,1,...,1" or "All" (enter to not hide results):
+INFO:Detectors:
+0: Pragma version=0.6.6 (UniswapInsuranceQuote.sol#1) allows old versions
+1: Pragma version>=0.6.6 (UniswapOracleFactory.sol#3) allows old versions
+2: Pragma version>=0.5.0 (UniswapOracleFactory.sol#23) allows old versions
+3: Pragma version>=0.4.0 (UniswapOracleFactory.sol#78) allows old versions
+4: Pragma version>=0.5.0 (UniswapOracleFactory.sol#140) allows old versions
+5: Pragma version=0.6.6 (UniswapV2Oracle.sol#1) allows old versions
+6: Pragma version>=0.4.22<0.8.0 (Migrations.sol#2) is too complex
+7: solc-0.6.6 is not recommended for deployment
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#incorrect-versions-of-solidity
+INFO:Detectors:
+Impossible to patch:
+	Pragma version=0.6.6 (UniswapInsuranceQuote.sol#1) allows old versions
+	Unknown version [('', '', '0', '6', '6')]
+INFO:Detectors:
+Impossible to patch:
+	Pragma version>=0.6.6 (UniswapOracleFactory.sol#3) allows old versions
+	Unknown version [('>=', '', '0', '6', '6')]
+INFO:Detectors:
+Impossible to patch:
+	Pragma version=0.6.6 (UniswapV2Oracle.sol#1) allows old versions
+	Unknown version [('', '', '0', '6', '6')]
